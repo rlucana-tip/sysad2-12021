@@ -1,0 +1,20 @@
+---
+  - name: Install vsftpd in Ubuntu
+    hosts: vsftpd_ubuntu
+    roles:
+      - vsftpd_ubuntu
+
+  - name: Install vsftpd in Centos
+    hosts: vsftpd_centos
+    roles:
+      - vsftpd_centos
+
+  - name: Install httpd in Ubuntu
+    hosts: httpd_ubuntu
+    roles:
+      - httpd_ubuntu
+
+  - name: Install httpd in Centos
+    hosts: httpd_centos
+    roles:
+      - httpd_centos
