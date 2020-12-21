@@ -1,7 +1,7 @@
 [dhcpd_ubuntu]
 192.168.1.5
 
-[dhcp_centos]
+[dhcpd_centos]
 192.168.1.17
 
 [bind9_ubuntu]
