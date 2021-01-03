@@ -1,0 +1,95 @@
+---
+# tasks file for roles/ubuntu_nagioscore
+
+  - name: Ubuntu | Install Pre-requisite Package
+    apt:
+      name:
+        - autoconf
+        - gcc
+        - libc6
+        - make
+        - wget
+        - unzip
+        - apache2
+        - php
+        - libapache2-mod-php7.4
+        - libgd-dev
+      state: latest
+      update_cache: yes
+
+  - name: Ubuntu | Download the Source
+    unarchive:
+      src: https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.5.tar.gz 
+      dest: /tmp/
+      remote_src: yes
+    register: nagios_download
+
+  - name: Ubuntu | Compile the Source
+    shell: cd /tmp/nagioscore-nagios-4.4.5; sh  /tmp/nagioscore-nagios-4.4.5/configure --with-httpd-conf=/etc/apache2/sites-enabled
+    when: nagios_download.changed
+
+  - name: Ubuntu | Compile Build
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: all
+
+  - name: Ubuntu | Create Make Groups-Users
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install-groups-users
+
+  - name: Ubuntu | Add www-data User
+    user:
+      name: www-data
+      group: nagios
+      append: yes
+
+  - name: Ubuntu | Install Binaries
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install
+
+  - name: Ubuntu | Install Service / Daemon
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install-daemoninit
+
+  - name: Ubuntu | Install Command Mode
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install-commandmode
+
+  - name: Ubuntu | Install Configuration Files
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install-config
+
+  - name: Ubuntu | Install Apache Config Files
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install-webconf
+    register: install_webconf
+
+  - name: Ubuntu | a2enmod rewrite
+    shell: a2enmod rewrite
+    when: install_webconf.changed
+
+  - name: Ubuntu | a2enmod cgi
+    shell: a2enmod cgi
+    when: install_webconf.changed
+
+  - name: Ubuntu | Stop Firewall
+    service:
+      name: ufw
+      state: stopped
+      enabled: no
+
+  - name: Ubuntu | Start Apache Web Server
+    service:
+      name: apache2
+      state: restarted
+
+  - name: Ubuntu | Start Nagios
+    service:
+      name: nagios
+      state: started

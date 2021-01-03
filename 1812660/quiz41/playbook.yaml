@@ -1,0 +1,10 @@
+---
+  - name: Ubuntu - Install and Configure Nagios
+    hosts: ubuntu
+    roles:
+      - ubuntu_nagioscore
+
+  - name: Centos - Install and Configure Nagios
+    hosts: centos
+    roles:
+      - centos_nagioscore
