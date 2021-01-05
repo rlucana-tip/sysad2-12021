@@ -1,0 +1,30 @@
+---
+  - name: Ubuntu | Grafana
+    hosts: ubuntu
+    roles:
+      - ubuntu_grafana
+
+  - name: Centos | Grafana
+    hosts: centos
+    roles:
+      - centos_grafana
+
+  - name: Ubuntu | Telegraf
+    hosts: ubuntu
+    roles:
+      - ubuntu_telegraf
+
+  - name: Centos | Telegraf
+    hosts: centos
+    roles:
+      - centos_telegraf
+
+  - name: Ubuntu | Prometheus
+    hosts: ubuntu
+    roles:
+      - ubuntu_prometheus
+
+  - name: Centos | Prometheus
+    hosts: centos
+    roles:
+      - centos_prometheus
