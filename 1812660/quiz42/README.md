@@ -2,7 +2,7 @@
 Reinhold E. Lucana
 
 ## Directory Structure
-.
+```
 ├── README.md
 ├── ansible.cfg
 ├── files
@@ -114,5 +114,5 @@ Reinhold E. Lucana
         │   └── test.yml
         └── vars
             └── main.yml
-
+```
 56 directories, 55 files
