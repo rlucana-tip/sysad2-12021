@@ -1,0 +1,12 @@
+---
+# tasks file for roles/ubuntu_logstash
+
+- name: Install Logstash
+  apt:
+     name: logstash
+     update_cache: yes
+
+- name: Start Logstash
+  service:
+    name: logstash
+    state: started
