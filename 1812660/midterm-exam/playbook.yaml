@@ -1,0 +1,46 @@
+---
+
+  - name: Ubuntu | Install Elasticsearch
+    hosts: elasticSearch_host
+    roles:
+      - elasticSearch
+
+  - name: Ubuntu | Install Kibana
+    hosts: kibana_host
+    roles:
+      - kibana
+
+  - name: Ubuntu | Install Logstash
+    hosts: logstash_host
+    roles:
+      - logstash
+
+  - name: Centos | Install Nagios Core
+    hosts: nagioscore_host
+    roles:
+      - nagioscore
+
+  - name: Ubuntu | Install Grafana
+    hosts: grafana_host
+    roles:
+      - grafana
+
+  - name: Ubuntu | Install InfluxDB
+    hosts: influxdb_host
+    roles:
+      - influxdb
+
+  - name: Centos | Install Prometheus
+    hosts: prometheus_host
+    roles:
+      - prometheus
+
+  - name: Ubuntu | Install HTTPD and PHP
+    hosts: httpd_php_host
+    roles:
+      - httpd_php
+
+  - name: Centos | Install MariaDB
+    hosts: mariadb_host
+    roles:
+      - mariadb

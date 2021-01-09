@@ -1,0 +1,83 @@
+---
+# tasks file for roles/nagioscore
+
+  - name: Centos | Install Pre-requisite Package
+    yum:
+      name:
+        - gcc
+        - glibc
+        - glibc-common
+        - wget
+        - unzip
+        - httpd
+        - php
+        - gd
+        - gd-devel
+        - perl
+        - postfix
+      state: latest
+      update_cache: yes
+
+  - name: Centos | Download the Source
+    unarchive:
+      src: https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.5.tar.gz
+      dest: /tmp/
+      remote_src: yes
+    register: nagios_download
+
+  - name: Centos | Compile the Source
+    shell: cd /tmp/nagioscore-nagios-4.4.5; sh /tmp/nagioscore-nagios-4.4.5/configure
+    when: nagios_download.changed
+
+  - name: Centos | Compile Build
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: all
+
+  - name: Centos | Create Make Groups-Users
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install-groups-users
+
+  - name: Centos | Add www-data user
+    user:
+      name: apache
+      group: nagios
+      append: yes
+
+  - name: Centos | Install Binaries
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install
+
+  - name: Centos | Install Daemon
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install-daemoninit
+
+  - name: Centos | Install Command Mode
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install-commandmode
+
+  - name: Centos | Install Configuration Files
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install-config
+
+  - name: Centos | Install HTTPD Congifuration Files
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.5/
+      target: install-webconf
+    register: install_webconf
+
+  - name: Centos | Stop Firewall
+    service:
+      name: firewalld
+      state: stopped
+      enabled: no
+
+  - name: Centos | Start Apache Web Server
+    service:
+      name: httpd
+      state: restarted

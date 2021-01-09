@@ -1,0 +1,48 @@
+---
+# tasks file for roles/kibana
+
+- name: Add Elastic GPG Key
+  apt_key:
+    url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+
+- name: Install APT Transport
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Add Elasticsearch Repo
+  shell: echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main"| sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+
+- name: Update Package
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Install Kibana
+  apt:
+    name: kibana
+    state: present
+    update_cache: yes
+
+- name: Modify Configuration File
+  lineinfile:
+    destfile: /etc/kibana/kibana.yml
+    regexp: 'server.host:'
+    line: 'server.host: localhost'
+
+- name: Define Server Port
+  lineinfile:
+    destfile: /etc/kibana/kibana.yml
+    regexp: 'server.port:'
+    line: 'server.port: 5601'
+
+- name: Define Elasticsearch URL
+  lineinfile:
+    destfile: /etc/kibana/kibana.yml
+    regexp: 'elasticsearch.hosts:'
+    line: 'elasticsearch.hosts: "https://localhost:9200"'
+
+- name: Start Kibana
+  service:
+    name: kibana
+    state: started
