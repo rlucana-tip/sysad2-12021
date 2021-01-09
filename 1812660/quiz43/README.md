@@ -4,7 +4,63 @@ Reinhold E. Lucana
 
 ## Directory Structure
 ```
-quiz43 [error opening dir]
+.
+├── README.md
+├── ansible.cfg
+├── inventory
+├── playbook.yaml
+└── roles
+    ├── ubuntu_elasticSearch
+    │   ├── README.md
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── files
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── templates
+    │   ├── tests
+    │   │   ├── inventory
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    ├── ubuntu_kibana
+    │   ├── README.md
+    │   ├── defaults
+    │   │   └── main.yml
+    │   ├── files
+    │   ├── handlers
+    │   │   └── main.yml
+    │   ├── meta
+    │   │   └── main.yml
+    │   ├── tasks
+    │   │   └── main.yml
+    │   ├── templates
+    │   ├── tests
+    │   │   ├── inventory
+    │   │   └── test.yml
+    │   └── vars
+    │       └── main.yml
+    └── ubuntu_logstash
+        ├── README.md
+        ├── defaults
+        │   └── main.yml
+        ├── files
+        ├── handlers
+        │   └── main.yml
+        ├── meta
+        │   └── main.yml
+        ├── tasks
+        │   └── main.yml
+        ├── templates
+        ├── tests
+        │   ├── inventory
+        │   └── test.yml
+        └── vars
+            └── main.yml
 
-0 directories, 0 files
+28 directories, 28 files
 ```
