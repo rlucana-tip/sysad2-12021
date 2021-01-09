@@ -4,8 +4,7 @@ Reinhold E. Lucana
 
 ## Directory Structure
 ```
-
-qui`z43 [error opening dir]
+quiz43 [error opening dir]
 
 0 directories, 0 files
 ```
