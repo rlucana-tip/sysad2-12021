@@ -1,0 +1,54 @@
+---
+# tasks file for roles/install_docker_ubuntu
+
+- name: Update Package
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Install Prerequisite Packages
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - python3
+      - python3-pip
+    state: latest
+    update_cache: yes
+
+- name: Add GPG Key for Docker
+  apt_key:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+
+- name: Add Docker Repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    state: present
+
+- name: Update Package
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Install Docker
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: yes
+
+- name: Install docker.py
+  pip:
+    name: docker.py
+    state: latest
+
+- name: Start Docker
+  service:
+    name: docker
+    state: started
+
+- name: Stop Firewall
+  service:
+    name: ufw
+    state: stopped
+    enabled: no

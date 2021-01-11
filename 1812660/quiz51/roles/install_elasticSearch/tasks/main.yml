@@ -1,0 +1,43 @@
+---
+# tasks file for roles/install_elasticSearch
+
+- name: Pulling the Image of Elasticsearch
+  docker_image:
+    name: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    source: pull
+
+- name: Create Container of Elasticsearch
+  docker_container:
+    name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    env:
+      discovery.type: "single-node"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+- name: Pulling the Image of Kibana
+  docker_image:
+    name: docker.elastic.co/kibana/kibana:7.10.1
+    source: pull
+
+- name: Create Container of Kibana
+  docker_container:
+    name: kibana
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    links: "elasticsearch:elasticsearch"
+    ports:
+      - "5601:5601"
+
+- name: Pulling the Image of Logstash
+  docker_image:
+    name: docker.elastic.co/logstash/logstash:7.10.1
+    source: pull
+
+- name: Creating the Container of Logstash
+  docker_container:
+    name: logstash
+    image: docker.elastic.co/logstash/logstash:7.10.1
+    links: "elasticsearch:elasticsearch"
+    ports:
+      - "5044:5044"

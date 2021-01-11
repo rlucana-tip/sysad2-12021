@@ -1,0 +1,21 @@
+---
+
+  - name: Ubuntu | Install Docker
+    hosts: ubuntu
+    roles:
+      - install_docker_ubuntu
+
+  - name: Centos | Install Docker
+    hosts: centos
+    roles:
+      - install_docker_centos
+
+  - name: Ubuntu - Install ELK Stack
+    hosts: ubuntu
+    roles:
+      - install_elasticSearch
+
+  - name: Centos - Install ELK Stack
+    hosts: centos
+    roles:
+      - install_elasticSearch
