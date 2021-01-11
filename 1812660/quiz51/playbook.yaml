@@ -13,9 +13,9 @@
   - name: Ubuntu - Install ELK Stack
     hosts: ubuntu
     roles:
-      - install_elasticSearch
+      - install_elkStack_ubuntu
 
   - name: Centos - Install ELK Stack
     hosts: centos
     roles:
-      - install_elasticSearch
+      - install_elkStack_centos

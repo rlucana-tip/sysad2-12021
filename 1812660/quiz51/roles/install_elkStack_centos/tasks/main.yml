@@ -1,10 +1,31 @@
 ---
-# tasks file for roles/install_elasticSearch
+# tasks file for roles/install_elkStack_centos
 
 - name: Pulling the Image of Elasticsearch
   docker_image:
     name: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
     source: pull
+
+- name: Pulling the Image of Kibana
+  docker_image:
+    name: docker.elastic.co/kibana/kibana:7.10.1
+    source: pull
+
+- name: Pulling the Image of Logstash
+  docker_image:
+    name: docker.elastic.co/logstash/logstash:7.10.1
+    source: pull
+
+- name: Clear IP tables
+  shell: iptables -X
+
+- name: Clear IP tables
+  shell: iptables -F
+
+- name: Restart Docker
+  service:
+    name: docker
+    state: restarted
 
 - name: Create Container of Elasticsearch
   docker_container:
@@ -16,11 +37,6 @@
       - "9200:9200"
       - "9300:9300"
 
-- name: Pulling the Image of Kibana
-  docker_image:
-    name: docker.elastic.co/kibana/kibana:7.10.1
-    source: pull
-
 - name: Create Container of Kibana
   docker_container:
     name: kibana
@@ -28,11 +44,6 @@
     links: "elasticsearch:elasticsearch"
     ports:
       - "5601:5601"
-
-- name: Pulling the Image of Logstash
-  docker_image:
-    name: docker.elastic.co/logstash/logstash:7.10.1
-    source: pull
 
 - name: Creating the Container of Logstash
   docker_container:
