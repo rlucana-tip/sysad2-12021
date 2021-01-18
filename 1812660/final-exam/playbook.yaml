@@ -1,0 +1,88 @@
+---
+
+  - name: 4.1 Debian | Cloning Prelim Exam Repository
+    hosts: debian
+    roles:
+      - clone_prelimExam_debian
+
+  - name: 4.1 Centos | Cloning Prelim Exam Repository
+    hosts: centos
+    roles:
+      - clone_prelimExam_centos
+
+  - name: 4.1 Opensuse | Cloning Prelim Exam Repository
+    hosts: opensuse
+    roles:
+      - clone_prelimExam_opensuse
+
+  - name: 4.2 Debian | Install and Configure HTTPD
+    hosts: debian
+    roles:
+      - httpd_debian
+
+  - name: 4.2 Centos | Install and Configure HTTPD
+    hosts: centos
+    roles:
+      - httpd_centos
+
+  - name: 4.2 Opensuse | Install and Configure HTTPD
+    hosts: opensuse
+    roles:
+      - httpd_opensuse
+
+  - name: 4.3 Debian | Install and Configure Grafana
+    hosts: debian_grafana
+    roles:
+      - grafana_debian
+
+  - name: 4.3 Debian | Install and Configure Telegraf
+    hosts: debian_telegraf
+    roles:
+      - telegraf_debian
+
+  - name: 4.3 Debian | Install and Configure Prometheus
+    hosts: debian_prometheus
+    roles:
+      - prometheus_debian
+
+  - name: 4.3 Centos | Install and Configure Grafana
+    hosts: centos_grafana
+    roles:
+      - grafana_centos
+
+  - name: 4.3 Centos | Install and Configure Telegraf
+    hosts: centos_telegraf
+    roles:
+      - telegraf_centos
+
+  - name: 4.3 Centos | Install and Configure Prometheus
+    hosts: centos_prometheus
+    roles:
+      - prometheus_centos
+
+  - name: 4.3 Opensuse | Install and Configure Grafana
+    hosts: opensuse_grafana
+    roles:
+      - grafana_opensuse
+
+  - name: 4.3 Opensuse | Install and Configure Telegraf
+    hosts: opensuse_telegraf
+    roles:
+      - telegraf_opensuse
+
+  - name: 4.3 Opensuse | Install and Configure Prometheus
+    hosts: opensuse_prometheus
+    roles:
+      - prometheus_opensuse
+
+  - name: 4.4 Change MOTD
+    hosts: all
+
+    tasks:
+    - name: Include Variables from config.yaml
+      include_vars:
+        file: config.yaml
+
+    - name: Include Change MOTD Role
+      include_role:
+        name: change_motd

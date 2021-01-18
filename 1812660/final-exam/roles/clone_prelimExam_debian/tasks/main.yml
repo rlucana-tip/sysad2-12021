@@ -1,0 +1,14 @@
+---
+# tasks file for roles/clone_prelimExam_debian
+
+- name: Install Git
+  apt:
+    name: git
+    state: latest
+    update_cache: yes
+
+- name: Clone Prelim Exam Repository
+  git:
+    repo: https://github.com/rlucana-tip/sysad2-12021.git
+    dest: /home/rlucana-tip/prelimExam_clone
+    version: prelim-exam
