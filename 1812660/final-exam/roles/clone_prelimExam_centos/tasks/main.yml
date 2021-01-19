@@ -9,6 +9,6 @@
 
 - name: Clone Prelim Exam Repository
   git:
-    repo: https://github.com/rlucana-tip/sysad2-12021.git
-    dest: /home/rlucana-tip/prelimExam_clone
-    version: prelim-exam
+    repo: "{{ git_repo }}"
+    dest: "{{ git_dest }}"
+    version: "{{ git_version }}"

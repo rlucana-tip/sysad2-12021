@@ -1,5 +1,10 @@
 ---
 
-#Username for MOTD
+# Clone Prelim Exam Repository
+git_repo: https://github.com/rlucana-tip/sysad2-12021.git
+git_dest: /home/rlucana-tip/prelimExam_clone
+git_version: prelim-exam
 
+
+# Username for MOTD
 username: rlucana-tip
