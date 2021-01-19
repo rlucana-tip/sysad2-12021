@@ -1,17 +1,17 @@
-#[debian]
-#192.168.1.8
+[debian]
+192.168.1.8
 
-#[debian_grafana]
-#192.168.1.23
+[debian_grafana]
+192.168.1.23
 
-#[debian_telegraf]
-#192.168.1.24
+[debian_telegraf]
+192.168.1.24
 
-#[debian_prometheus]
-#192.168.1.25
+[debian_prometheus]
+192.168.1.25
 
-#[centos]
-#192.168.1.14
+[centos]
+192.168.1.14
 
 [centos_grafana]
 192.168.1.26
@@ -22,11 +22,14 @@
 [centos_prometheus]
 192.168.1.29
 
-#[opensuse]
-#192.168.1.22
+[opensuse]
+192.168.1.22
 
-#[opensuse_grafana]
+[opensuse_grafana]
+192.168.1.30
 
-#[opensuse_telegraf]
+[opensuse_telegraf]
+192.168.1.9
 
-#[opensuse_prometheus]
+[opensuse_prometheus]
+192.168.1.31
