@@ -1,3 +1,8 @@
+# Directory Summary
+Reinhold E. Lucana
+
+## Directory Structure
+```
 .
 ├── README.md
 ├── ansible.cfg
@@ -287,3 +292,4 @@
             └── main.yml
 
 146 directories, 140 files
+```
